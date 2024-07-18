@@ -82,7 +82,8 @@ export async function loadApp(fragParams: {}, matrixChatRef: React.Ref<MatrixCha
         .mx_InviteDialog_section_hidden_suggestions_disclaimer,
         .mx_SpotlightDialog_section.mx_SpotlightDialog_hiddenResults,
         .mx_InviteDialog_footer,
-        #matrixchat #floating-ui-23 {
+        #matrixchat #floating-ui-23,
+        .mx_AuthFooter {
             display:none !important;
         }
         .mx_AppTileMenuBar .mx_AppTileMenuBar_title span b {
@@ -122,6 +123,7 @@ export async function loadApp(fragParams: {}, matrixChatRef: React.Ref<MatrixCha
     const isReturningFromSso = !!params.loginToken;
     const ssoRedirects = parseSsoRedirectOptions(config);
     let autoRedirect = ssoRedirects.immediate === true;
+    console.log("Testing: ", userId)
     // XXX: This path matching is a bit brittle, but better to do it early instead of in the app code.
     const isWelcomeOrLanding =
         window.location.hash === "#/welcome" || window.location.hash === "#" || window.location.hash === "";

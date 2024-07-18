@@ -409,6 +409,52 @@ async function start(): Promise<void> {
                         console.error("Failed to load existing session:", error);
                         window.parent.postMessage({ type: 'sessionLoadFailed', error: error }, '*');
                     }
+                } else if (event.data.type === 'logout') {
+                    console.log("Logout all sessions");
+                    try {
+                        const { MatrixClientPeg } = await import("matrix-react-sdk/src/MatrixClientPeg");
+                        const client = MatrixClientPeg.get();
+                
+                        if (client && client.isLoggedIn()) {
+                            // Logout all sessions
+                            const accessToken = client.getAccessToken();
+                            
+                            const response = await fetch('https://chat.gabay.online/_matrix/client/r0/logout/all', {
+                                method: 'POST',
+                                headers: {
+                                    'Authorization': `Bearer ${accessToken}`,
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+                        
+                            if (response.ok) {
+                        
+                                // The rest of your logout code remains the same
+                                client.stopClient();
+                            
+                                localStorage.removeItem('mx_has_access_token');
+                                localStorage.removeItem('mx_hs_url');
+                                localStorage.removeItem('mx_user_id');
+                                localStorage.removeItem('mx_device_id');
+                                localStorage.removeItem('mx_access_token');
+                                localStorage.removeItem('mx_is_guest');
+                            
+                                MatrixClientPeg.unset();
+                            
+                                window.parent.postMessage({ type: 'logoutComplete' }, '*');
+                            
+                                console.log("Logout all sessions successful");
+                            } else {
+                                console.error("Failed to logout. Status: ", response.status);
+                            }
+                        } else {
+                            window.parent.postMessage({ type: 'logoutComplete', info: 'No active session' }, '*');
+                            console.log("No active session to logout");
+                        }
+                    } catch (error) {
+                        console.error("Logout all sessions failed:", error);
+                        window.parent.postMessage({ type: 'logoutAllFailed', error }, '*');
+                    }
                 }
             });
 
@@ -416,7 +462,7 @@ async function start(): Promise<void> {
             return;
         }
 
-
+        // syt_Y2xpbnRzamN3_uoRMVGnjkxlaAUUARHxX_04DvmE
         // Add this code just before the loadApp call in the start function
         // Initialize the mock client
         // const mockClient = new MockMatrixClient();
