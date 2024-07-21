@@ -102,6 +102,9 @@ export async function loadApp(fragParams: {}, matrixChatRef: React.Ref<MatrixCha
             box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px;
             border-bottom: 0;
         }
+        #matrixchat > .mx_AuthPage {
+            background:#fff !important;
+        }
         /* Add more custom styles here */
     `;
     document.head.appendChild(style);

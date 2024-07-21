@@ -254,6 +254,7 @@ module.exports = (env, argv) => {
                 "net": false,
                 "tls": false,
                 "crypto": false,
+                "path": require.resolve("path-browserify"),
 
                 // Polyfill needed by counterpart
                 "util": require.resolve("util/"),
@@ -745,6 +746,7 @@ module.exports = (env, argv) => {
             new webpack.ProvidePlugin({
                 Buffer: ["buffer", "Buffer"],
                 process: "process/browser",
+                Olm: 'olm',
             }),
         ].filter(Boolean),
 

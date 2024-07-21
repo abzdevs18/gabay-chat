@@ -96,9 +96,9 @@ const CompatibilityView: React.FC<IProps> = ({ onAccept }) => {
         <div className="mx_ErrorView">
             <div className="mx_ErrorView_container">
                 <div className="mx_HomePage_header">
-                    <span className="mx_HomePage_logo">
+                    {/* <span className="mx_HomePage_logo">
                         <img height="42" src="themes/element/img/logos/element-logo.svg" alt="Element" />
-                    </span>
+                    </span> */}
                     <h1>{_t("incompatible_browser|title")}</h1>
                 </div>
 
@@ -124,7 +124,7 @@ const CompatibilityView: React.FC<IProps> = ({ onAccept }) => {
                     </div>
                 </div>
 
-                <div className="mx_HomePage_col">
+                {/* <div className="mx_HomePage_col">
                     <div className="mx_HomePage_row">
                         <div>
                             {mobileHeader}
@@ -140,7 +140,7 @@ const CompatibilityView: React.FC<IProps> = ({ onAccept }) => {
                             {_t("go_to_element_io")}
                         </a>
                     </p>
-                </div>
+                </div> */}
             </div>
         </div>
     );
